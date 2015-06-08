@@ -1,2 +1,36 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url(http://fonts.googleapis.com/css?family=Balthazar);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.main-h1-title {
+  color: #343430;
+  font-family: 'Balthazar', serif;
+}
+.post-title {
+  text-transform: capitalize;
+  text-align: center;
+  a {
+    color: #69695F;
+    font-size: 24px;
+    font-family: 'Balthazar', serif;
+  }
+}
+.show-post-title {
+  font-family: 'Balthazar', serif;
+  text-transform: capitalize;
+  color: #69695F;
+  font-size: 30px;
+}
+
+.author {
+  font-size: 15px;
+  float: right;
+  margin-right: 10%;
+  color: #4C4C33;
+  text-decoration: underline;
+}
