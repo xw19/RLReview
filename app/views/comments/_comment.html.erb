@@ -1,0 +1,14 @@
+<% comment.comments.each do |comment| %>
+  <div class="comment">
+    <p><%= comment.body =%></p>
+    <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+    <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
+  </div>
+  <% a = comment.comments.build %>
+  <%= simple_form_for(a) do |f| %>
+    <%= f.input :body %>
+    <%= f.input :commentable_id, as: :hidden, value: comment.id %>
+    <%= f.input :commentable_type, as: :hidden, value: a.commentable_type %>
+    <%= f.button :submit %>
+  <% end %>
+<% end %>

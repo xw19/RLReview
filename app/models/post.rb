@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   belongs_to :category
-  has_many :comments
+  has_many :comments, as: :commentable
 
   attr_accessor :category_string
 
