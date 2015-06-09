@@ -11,6 +11,10 @@ class Post < ActiveRecord::Base
   protected
 
   def set_category
-    self.category = Category.find_or_create_by(title: :category_string)
+    if self.category_string.nil?
+      self.category = Category.find_or_create_by(title: "Misc")
+    else
+      self.category = Category.find_or_create_by(title: :category_string)
+    end
   end
 end
