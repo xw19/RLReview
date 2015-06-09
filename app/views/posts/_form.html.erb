@@ -1,6 +1,7 @@
-<%= simple_form_for @post do |f| %>
-  <%= f.input :title %>
-  <%= f.input :category_string, collection: %w(Racquet String) ,required: true %>
-  <%= f.input :body %>
-  <%= f.button :submit %>
-<% end %>
+  <%= simple_form_for @post,  html: { class: 'form-horizontal' } do |f| %>
+    <%= f.input :title %>
+    <%= f.input :category_string, collection: %w(Racquet String) ,required: true %>
+    <%= f.input :body %>
+    <%= f.button :submit %>
+  <% end %>
+  
