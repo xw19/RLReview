@@ -1,5 +1,7 @@
 <h1 class="show-post-title"><%= @post.title %></h1>
-<div>
+<small class="post-time"><%= @post.created_at.to_date %></small>
+<p class="author">Author</p>
+<div class="main-content">
   <%= @post.body %>
 </div>
 
