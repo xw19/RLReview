@@ -17,7 +17,7 @@
               <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
               <small class="comment-reply"><a href="#">Reply</a></small>
             </div>
-            <div>
+            <div class="comment-comments">
               <% comment.comments.each do |comment| %>
                 <div class="comment comment2">
                   <p><%= comment.body =%></p>
@@ -38,7 +38,7 @@
           <div>
             <div class="panel-body">
               <%= simple_form_for(@post.comments.new) do |f| %>
-                <%= f.input :body %>
+                <%= f.input :body, label: "New Comment" %>
                 <%= f.input :commentable_id, as: :hidden, value: @post.id %>
                 <%= f.input :commentable_type, as: :hidden, value: @post.comments.new.commentable_type %>
                 <%= f.button :submit %>
