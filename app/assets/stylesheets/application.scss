@@ -36,7 +36,7 @@ body {
 }
 .comment {
   background-color: #D4D4CA;
-  margin: 5px;
+  margin: 5px 5px 5px 0;
   padding: 10px 5px;
 }
 .comment2 {
@@ -46,8 +46,8 @@ body {
   float: right;
   margin: 0px 5px 0 0;
 }
-.comment-comments {
-  border-bottom: 1px dashed #A4A4A4;
+.comment-section {
+  border-left: 1px dashed #A4A4A4;
 }
 .post-time {
   margin-left: 10%;

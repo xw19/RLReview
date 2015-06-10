@@ -6,63 +6,28 @@
     <%= @post.body %>
   </div>
 </article>
-
-<div class="container" role="comments">
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">
-      <div class="panel panel-default">
-        <div class="panel-heading">Comments:</div>
-        <div class="panel-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-offset-4 col-md-4"><%= paginate @comments %></div>
-            </div>
-            <% @comments.each do |comment| %>
-            <div class="row">
-              <div class="comment">
-                <p><%= comment.body =%></p>
-                <small><%= time_ago_in_words(comment.created_at) %> ago</small>
-                <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
-                <small class="comment-reply"><a href="#">Reply</a></small>
-              </div>
-              <div class="comment-comments">
-                <% comment.comments.each do |comment| %>
-                <div class="comment comment2">
-                  <p><%= comment.body =%></p>
-                  <small><%= time_ago_in_words(comment.created_at) %> ago</small>
-                  <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
-                </div>
-                <% end %>
-              </div>
-              <div class="comment-form comment2">
-                <%= simple_form_for(comment.comments.build) do |f| %>
-                <%= f.input :body, label: "Comment" %>
-                <%= f.input :commentable_id, as: :hidden, value: comment.id %>
-                <%= f.input :commentable_type, as: :hidden, value: "Comment" %>
-                <%= f.button :submit, value: "Reply" %>
-                <% end %>
-              </div>
-            </div>
-            <% end %>
-            <div class="row">
-              <div class="col-md-offset-4 col-md-4"><%= paginate @comments %></div>
-            </div>
-            <%= simple_form_for(@post.comments.new) do |f| %>
-            <%= f.input :body, label: "New Comment" %>
-            <%= f.input :commentable_id, as: :hidden, value: @post.id %>
-            <%= f.input :commentable_type, as: :hidden, value: @post.comments.new.commentable_type %>
-            <%= f.button :submit %>
-            <% end %>
-          </div>
-        </div>
-      </div>
+<div class="panel panel-default">
+  <div class="panel-heading">Comments</div>
+  <div class="panel-body">
+    <%= render partial: "comments/comment", collection: @comments %>
+    <div>
+      <%= simple_form_for(@post.comments.new) do |f| %>
+        <%= f.input :body, label: "New Comment" %>
+        <%= f.input :commentable_id, as: :hidden, value: @post.id %>
+        <%= f.input :commentable_type, as: :hidden, value: "Post" %>
+        <%= f.button :submit %>
+      <% end %>
     </div>
   </div>
 </div>
 <script>
-$(".comment-form").css('display', 'none');
-$(".comment-reply").on ("click", function(event) {
-  event.preventDefault();
-  $(this).parent().next().next().css('display', 'block');
-});
+  $(".comment-form").css('display', 'none');
+  $(".comment-reply").on ("click", function(event) {
+    event.preventDefault();
+    $(this).parent().next().next().toggle(function() {
+      $(this).parent().next().next().css("display", "block");
+    }, function() {
+      $(this).parent().next().next().css("display", "none");
+    });
+  });
 </script>
