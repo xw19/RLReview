@@ -1,6 +1,9 @@
-<h1 class="main-h1-title">All Posts</h1>
+<header>
+  <h1 class="main-h1-title">All Posts</h1>
+</header>
 <% @posts.each do |post| %>
-  <div class="panel panel-default">
+<div class="panel panel-default">
+  <article>
     <h2 class="post-title"><%= link_to post.title, post_path(post) %></h2>
     <div class="clearfix">
       <small class="post-time"><%= post.created_at.to_date %></small>
@@ -9,5 +12,11 @@
     <div class="panel-body">
       <%= post.body %>
     </div>
-</div>
+  </div>
+</article>
 <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-4 col-md-4"><%= paginate @posts %></div>
+  </row>
+</div>

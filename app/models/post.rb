@@ -2,6 +2,8 @@ class Post < ActiveRecord::Base
   belongs_to :category
   has_many :comments, as: :commentable
 
+  paginates_per 5
+
   attr_accessor :category_string
 
   validates :title, presence: true, length: { maximum: 50 }
