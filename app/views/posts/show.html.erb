@@ -10,6 +10,9 @@
   <div class="panel-heading">Comments</div>
   <div class="panel-body">
     <%= render partial: "comments/comment", collection: @comments %>
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4"><%= paginate @comments %></div>
+    </div>
     <div>
       <%= simple_form_for(@post.comments.new) do |f| %>
         <%= f.input :body, label: "New Comment" %>

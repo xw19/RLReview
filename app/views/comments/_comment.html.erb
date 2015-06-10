@@ -1,6 +1,6 @@
 <div class="comment-section">
   <div class="comment">
-    <p><%= comment.body =%></p>
+    <p><%= markdown(comment.body) =%></p>
     <small><%= time_ago_in_words(comment.created_at) %> ago</small>
     <small class="comment-reply"><a href="#">Reply</a></small>
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
