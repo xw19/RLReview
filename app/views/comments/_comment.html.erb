@@ -6,7 +6,7 @@
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
   </div>
   <div class="comment2">
-    <%= render partial: "comments/comment", collection: comment.comments if comment.comments.any? %>
+    <%= render partial: "comments/comment", collection: comment.comments.order('created_at DESC') if comment.comments.any? %>
   </div>
   <div class="comment-form">
     <%= simple_form_for(comment.comments.new) do |f| %>

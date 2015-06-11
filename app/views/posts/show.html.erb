@@ -9,7 +9,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">Comments</div>
   <div class="panel-body">
-    <%= render partial: "comments/comment", collection: @comments %>
+    <%= render partial: "comments/comment", collection: @comments.order('created_at DESC') %>
     <div class="row">
       <div class="col-md-offset-4 col-md-4"><%= paginate @comments %></div>
     </div>
