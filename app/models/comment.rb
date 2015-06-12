@@ -5,5 +5,7 @@ class Comment < ActiveRecord::Base
   belongs_to :comment
   has_many :comments, as: :commentable
 
+  default_scope { order('created_at DESC') }
+
   validates :body, presence: true, length: { maximum: 1000 }
 end
