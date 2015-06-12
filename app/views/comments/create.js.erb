@@ -1,0 +1,11 @@
+$("#comments").html('<%= j render partial: 'comments/comment', collection: @comments, locals: { post_id: @post_id } %>');
+$(".comment-box").val('');
+$(".comment-form").css('display', 'none');
+$(".comment-reply").on ("click", function(event) {
+  event.preventDefault();
+  $(this).parent().next().next().toggle(function() {
+    $(this).parent().next().next().css("display", "block");
+  }, function() {
+    $(this).parent().next().next().css("display", "none");
+  });
+});

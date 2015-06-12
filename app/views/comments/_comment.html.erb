@@ -6,13 +6,14 @@
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
   </div>
   <div class="comment2">
-    <%= render partial: "comments/comment", collection: comment.comments if comment.comments.any? %>
+    <%= render partial: "comments/comment", collection: comment.comments, locals: { post_id: post_id } if comment.comments.any? %>
   </div>
   <div class="comment-form">
-    <%= simple_form_for(comment.comments.new) do |f| %>
-      <%= f.input :body, label: "Reply" %>
+    <%= simple_form_for(comment.comments.new, remote: true) do |f| %>
+      <%= f.input :body, label: "Reply", input_html: {class: "comment-box"} %>
       <%= f.input :commentable_id, as: :hidden, value: comment.id %>
       <%= f.input :commentable_type, as: :hidden, value: "Comment" %>
+      <%= f.input_field :post_id, as: :hidden, value: post_id %>
       <%= f.button :submit %>
     <% end %>
   </div>

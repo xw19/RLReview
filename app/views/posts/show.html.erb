@@ -9,15 +9,18 @@
 <div class="panel panel-default">
   <div class="panel-heading">Comments</div>
   <div class="panel-body">
-    <%= render partial: "comments/comment", collection: @comments %>
+    <div id="comments">
+      <%= render partial: "comments/comment", collection: @comments, locals: { post_id: @post.id } %>
+    </div>
     <div class="row">
-      <div class="col-md-offset-4 col-md-4"><%= paginate @comments %></div>
+      <div class="col-md-offset-4 col-md-4" id="paginator"><%= paginate @comments%></div>
     </div>
     <div>
-      <%= simple_form_for(@post.comments.new) do |f| %>
-        <%= f.input :body, label: "New Comment" %>
+      <%= simple_form_for(@post.comments.new, remote: true) do |f| %>
+        <%= f.input :body, label: "New Comment", input_html: {class: "comment-box"} %>
         <%= f.input :commentable_id, as: :hidden, value: @post.id %>
         <%= f.input :commentable_type, as: :hidden, value: "Post" %>
+        <%= f.input_field :post_id, as: :hidden, value: @post.id %>
         <%= f.button :submit %>
       <% end %>
     </div>
