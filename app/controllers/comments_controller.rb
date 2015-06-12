@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
 
   def create
-    @comment = Comment.new(comments_params.except(:post_id))
+    @comment = Comment.new(comments_params.except(:post_id, :page))
     @comment.user_id = 1 # to be replaced with current_user
     @post_id = params[:comment][:post_id].to_i
-    @comments = Post.find(@post_id).comments.page(params[:page])
+    @comments = Post.find(@post_id).comments.page(params[:comment][:page])
     if @comment.save
       flash[:notice] = "Commented"
     else
@@ -20,6 +20,6 @@ class CommentsController < ApplicationController
   private
 
   def comments_params
-    params.require(:comment).permit(:body, :commentable_id, :commentable_type, :post_id)
+    params.require(:comment).permit(:body, :commentable_id, :commentable_type, :post_id, :page)
   end
 end

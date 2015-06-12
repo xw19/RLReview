@@ -14,6 +14,7 @@
       <%= f.input :commentable_id, as: :hidden, value: comment.id %>
       <%= f.input :commentable_type, as: :hidden, value: "Comment" %>
       <%= f.input_field :post_id, as: :hidden, value: post_id %>
+      <%= f.input_field :page, as: :hidden, value: params[:page] %>
       <%= f.button :submit %>
     <% end %>
   </div>
