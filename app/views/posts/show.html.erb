@@ -15,16 +15,20 @@
     <div class="row">
       <div class="col-md-offset-4 col-md-4" id="paginator"><%= paginate @comments%></div>
     </div>
-    <div>
-      <%= simple_form_for(@post.comments.new, remote: true) do |f| %>
-        <%= f.input :body, label: "New Comment", input_html: {class: "comment-box"} %>
-        <%= f.input :commentable_id, as: :hidden, value: @post.id %>
-        <%= f.input :commentable_type, as: :hidden, value: "Post" %>
-        <%= f.input_field :post_id, as: :hidden, value: @post.id %>
-        <%= f.input_field :page, as: :hidden, value: params[:page] %>
-        <%= f.button :submit %>
-      <% end %>
-    </div>
+    <% if current_user.nil? %>
+      <div>Login to Post comment</div>
+    <% else %>
+      <div>
+        <%= simple_form_for(@post.comments.new, remote: true) do |f| %>
+          <%= f.input :body, label: "New Comment", input_html: {class: "comment-box"} %>
+          <%= f.input :commentable_id, as: :hidden, value: @post.id %>
+          <%= f.input :commentable_type, as: :hidden, value: "Post" %>
+          <%= f.input_field :post_id, as: :hidden, value: @post.id %>
+          <%= f.input_field :page, as: :hidden, value: params[:page] %>
+          <%= f.button :submit %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
 <script>
