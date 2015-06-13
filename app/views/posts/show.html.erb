@@ -41,4 +41,13 @@
       $(this).parent().next().next().css("display", "none");
     });
   });
+  $(".report-form").css('display', 'none');
+  $(".report-user").on ("click", function(event) {
+    event.preventDefault();
+    $(this).parent().next().next().next().toggle(function() {
+      $(this).parent().next().next().next().css("display", "block");
+    }, function() {
+      $(this).parent().next().next().next().css("display", "none");
+    });
+  });
 </script>
