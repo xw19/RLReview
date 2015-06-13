@@ -4,9 +4,9 @@
     <small><%= time_ago_in_words(comment.created_at) %> ago</small>
     <% unless current_user.nil? %>
       <small class="comment-reply"><a href="#">Reply</a></small>
+      <small class="report-user"><a href="#">Report</a></small>
     <% end %>
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
-    <small class="report-user"><a href="#">Report</a></small>
   </div>
   <div class="comment2">
     <%= render partial: "comments/comment", collection: comment.comments, locals: { post_id: post_id } if comment.comments.any? %>
