@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.includes(:comments, :user, :reports).page(params[:page])
+    @comments = @post.root_comments.page(params[:page])
   end
 
   private

@@ -13,13 +13,13 @@
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
   </div>
   <div class="comment2">
-    <%= render partial: "comments/comment", collection: comment.comments, locals: { post_id: post_id } if comment.comments.any? %>
+    <%= render partial: "comments/comment", collection: comment.children, locals: { post_id: post_id } if comment.has_children? %>
   </div>
   <div class="comment-form">
-    <%= simple_form_for(comment.comments.new, remote: true) do |f| %>
+    <%= simple_form_for(Comment.new, remote: true) do |f| %>
       <%= f.input :body, label: "Reply", input_html: {class: "comment-box"} %>
-      <%= f.input :commentable_id, as: :hidden, value: comment.id %>
-      <%= f.input :commentable_type, as: :hidden, value: "Comment" %>
+      <%= f.input_field :commentable_id, as: :hidden, value: comment.id %>
+      <%= f.input_field :commentable_type, as: :hidden, value: "Comment" %>
       <%= f.input_field :post_id, as: :hidden, value: post_id %>
       <%= f.input_field :page, as: :hidden, value: params[:page] %>
       <%= f.button :submit %>

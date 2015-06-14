@@ -1,4 +1,4 @@
-$("#comments").html('<%= j render partial: 'comments/comment', collection: @comments, locals: { post_id: @post_id } %>');
+$("#comments").html('<%= j render partial: 'comments/comment', collection: @comments, locals: { post_id: @post.id } %>');
 
 $(".comment-box").val('');
 $(".comment-form").css('display', 'none');

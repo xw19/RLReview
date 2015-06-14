@@ -1,7 +1,8 @@
 class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
-  has_many :comments, as: :commentable
+
+  acts_as_commentable
 
   paginates_per 5
 

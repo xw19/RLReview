@@ -2,17 +2,19 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @comment = Comment.new(comments_params.except(:post_id, :page))
-    @comment.user = current_user
-    @post_id = params[:comment][:post_id].to_i
-    @comments = Post.find(@post_id).comments.includes(:comments, :user, :reports).page(params[:comment][:page])
+    @post = Post.find(params[:comment][:post_id])
+    # resource = ""
+    # (params[:comment][:commentable_type] == "Post") ? resource = @post : resource = Comment.find(params[:comment][:commentable_id])
+    @comment = Comment.build_from(@post, current_user.id, params[:comment][:body])
+    @comments = @post.root_comments.page(params[:comment][:page])
     if @comment.save
       flash[:notice] = "Commented"
     else
       flash[:alert] = "something went wrong"
     end
+    @comment.move_to_child_of(Comment.find(params[:comment][:commentable_id])) if params[:comment][:commentable_type] == "Comment"
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to @post }
       format.js
     end
   end
