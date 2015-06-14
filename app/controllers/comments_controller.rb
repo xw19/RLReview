@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comments_params.except(:post_id, :page))
     @comment.user = current_user
     @post_id = params[:comment][:post_id].to_i
-    @comments = Post.find(@post_id).comments.includes(:comments).page(params[:comment][:page])
+    @comments = Post.find(@post_id).comments.includes(:comments, :user, :reports).page(params[:comment][:page])
     if @comment.save
       flash[:notice] = "Commented"
     else
