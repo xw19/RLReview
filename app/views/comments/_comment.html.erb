@@ -1,10 +1,14 @@
 <div class="comment-section clearfix">
   <div class="comment <%= "reported" if !current_user.nil? && comment.reports.where(user_id: current_user.id).any? %>">
-    <p><%= markdown(comment.body) =%></p>
-    <small><%= time_ago_in_words(comment.created_at) %> ago</small>
-    <% unless current_user.nil? %>
-      <small class="comment-reply"><a href="#">Reply</a></small>
-      <small class="report-user"><a href="#">Report</a></small>
+    <% if comment.user.nil? %>
+      <p>["Deleted"]</p>
+    <% else %>
+      <p><%= markdown(comment.body) =%></p>
+      <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+      <% unless current_user.nil? %>
+        <small class="comment-reply"><a href="#">Reply</a></small>
+        <small class="report-user"><a href="#">Report</a></small>
+      <% end %>
     <% end %>
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
   </div>

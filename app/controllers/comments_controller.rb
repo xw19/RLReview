@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comments_params.except(:post_id, :page))
-    @comment.user_id = current_user
+    @comment.user = current_user
     @post_id = params[:comment][:post_id].to_i
     @comments = Post.find(@post_id).comments.includes(:comments).page(params[:comment][:page])
     if @comment.save
