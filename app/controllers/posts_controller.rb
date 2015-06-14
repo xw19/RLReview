@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  http_basic_authenticate_with name: "cpg", password: "password", except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
 
   def index
@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(posts_params)
-    @post.user_id = 1 # Currently there is only one author
+    @post.user = current_user # Currently there is only one author
     if @post.save
       redirect_to @post, notice: "Post successfully created"
     else
@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.includes(:comments).page(params[:page])
+    @comments = @post.comments.includes(:comments, :user, :reports).page(params[:page])
   end
 
   private

@@ -1,8 +1,15 @@
-<div class="comment-section">
-  <div class="comment">
-    <p><%= markdown(comment.body) =%></p>
-    <small><%= time_ago_in_words(comment.created_at) %> ago</small>
-    <small class="comment-reply"><a href="#">Reply</a></small>
+<div class="comment-section clearfix">
+  <div class="comment <%= "reported" if !current_user.nil? && comment.reports.where(user_id: current_user.id).any? %>">
+    <% if comment.user.nil? %>
+      <p>["Deleted"]</p>
+    <% else %>
+      <p><%= markdown(comment.body) =%></p>
+      <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+      <% unless current_user.nil? %>
+        <small class="comment-reply"><a href="#">Reply</a></small>
+        <small class="report-user"><a href="#">Report</a></small>
+      <% end %>
+    <% end %>
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
   </div>
   <div class="comment2">
@@ -17,5 +24,8 @@
       <%= f.input_field :page, as: :hidden, value: params[:page] %>
       <%= f.button :submit %>
     <% end %>
+  </div>
+  <div class="report-form">
+    <%= render partial: "reports/report", locals: { comment_id: comment.id } %>
   </div>
 </div>
