@@ -1,6 +1,0 @@
-<%= simple_form_for(Report.new) do |f| %>
-  <%= f.input :reason, label: "Why do you want report this comment ?" %>
-  <%= f.input_field :reportable_id, as: :hidden, value: comment_id %>
-  <%= f.input_field :reportable_type, as: :hidden, value: "Comment" %>
-  <%= f.button :submit, value: "Submit" %>
-<% end %>

@@ -7,7 +7,7 @@
       <small><%= time_ago_in_words(comment.created_at) %> ago</small>
       <% unless current_user.nil? %>
         <small class="comment-reply"><a href="#">Reply</a></small>
-        <small class="report-user"><a href="#">Report</a></small>
+        <small class="report-user"><%= link_to "report", reports_path(report: {reportable_id: comment.id, reportable_type: "Comment"}), method: :post unless comment.reports.where(user: current_user).any? %></a></small>
       <% end %>
     <% end %>
     <small class="comment-user">By: <%= "Dummy user" %></small><!-- comment.user.name -->
@@ -24,8 +24,5 @@
       <%= f.input_field :page, as: :hidden, value: params[:page] %>
       <%= f.button :submit %>
     <% end %>
-  </div>
-  <div class="report-form">
-    <%= render partial: "reports/report", locals: { comment_id: comment.id } %>
   </div>
 </div>
