@@ -1,7 +1,7 @@
 <div class="comment-section clearfix">
-  <div class="comment <%= "reported" if !current_user.nil? && comment.reports.where(user_id: current_user.id).any? %>">
+  <div class="comment <%= "reported" if comment.reports.count > 5 %>">
     <% if comment.user.nil? %>
-      <p>["Deleted"]</p>
+      <p>[deleted]</p>
     <% else %>
       <p><%= markdown(comment.body) =%></p>
       <small><%= time_ago_in_words(comment.created_at) %> ago</small>

@@ -3,8 +3,6 @@ class CommentsController < ApplicationController
 
   def create
     @post = Post.find(params[:comment][:post_id])
-    # resource = ""
-    # (params[:comment][:commentable_type] == "Post") ? resource = @post : resource = Comment.find(params[:comment][:commentable_id])
     @comment = Comment.build_from(@post, current_user.id, params[:comment][:body])
     @comments = @post.root_comments.page(params[:comment][:page])
     if @comment.save
