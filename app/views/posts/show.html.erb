@@ -5,7 +5,9 @@
   <div class="main-content" role="main">
     <%= @post.body %>
   </div>
-  <% unless current_user.nil? %>
+  <% if current_user.nil? %>
+    <div>Login to Rate the Article</div>
+  <% else %>
     <%= rating_for @post, "useful", disable_after_rate: true, imdb_avg: true %>
   <% end %>
 </article>
