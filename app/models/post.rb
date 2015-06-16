@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
 
   paginates_per 5
 
+  ratyrate_rateable "useful"
+
   attr_accessor :category_string
 
   validates :title, presence: true, length: { maximum: 50 }

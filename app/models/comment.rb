@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
 
   paginates_per 5
 
-  ratyrate_rateable "useful"
+
 
   validates :body, :presence => true
   validates :user, :presence => true

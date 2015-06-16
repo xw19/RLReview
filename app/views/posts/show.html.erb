@@ -5,6 +5,9 @@
   <div class="main-content" role="main">
     <%= @post.body %>
   </div>
+  <% unless current_user.nil? %>
+    <%= rating_for @post, "useful", disable_after_rate: true, imdb_avg: true %>
+  <% end %>
 </article>
 <div class="panel panel-default">
   <div class="panel-heading">Comments</div>
