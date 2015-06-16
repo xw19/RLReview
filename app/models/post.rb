@@ -19,7 +19,7 @@ class Post < ActiveRecord::Base
     if self.category_string.nil?
       self.category = Category.find_or_create_by(title: "Misc")
     else
-      self.category = Category.find_or_create_by(title: :category_string)
+      errors.add(:category_string, "Invalid category") unless (self.category = Category.find_or_create_by(title: self.category_string)).valid?
     end
   end
 end
